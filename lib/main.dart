@@ -109,28 +109,26 @@ class HomePage extends StatelessWidget{
       child: Padding(
 
         padding: EdgeInsets.all(8.0),
-        child: Row(
+        child:  FlatButton(
+              child: Row(
+                mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
 
-          mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
-          children: <Widget>[
+                  Text(day),
+                  Icon(icono),
+                  Text(temp),
 
-          Text(day),
-          Icon(icono),
-          Text(temp),
-          FlatButton(
-            child: Text("Detalle"),
-            color: Colors.black,
-            onPressed: (){
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => Detalle(day)
-                ));
-            },
-          )
 
-        ],
-      )
+                ],
+              ),
+              
+              onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => Detalle(day)));
+              }
+
       ),
-    );
+    ));
   }
 }
 
