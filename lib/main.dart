@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget{
     return (Column(
       children: <Widget>[
         header(),
-        listWidget()
+        listWidget(context)
       ],
     ));
   }
@@ -88,31 +88,45 @@ class HomePage extends StatelessWidget{
     ));
   }
 
-  Widget listWidget(){
+  Widget listWidget(BuildContext context){
     return Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            dayWidget("Lunes", Icons.wb_sunny,"32C"),
-            dayWidget("Martes", Icons.wb_sunny,"30C"),
-            dayWidget("Miercoles", Icons.wb_cloudy,"16C"),
-            dayWidget("Jueves", Icons.grain,"10C"),
-            dayWidget("Viernes", Icons.wb_sunny,"32C"),
+            dayWidget("Lunes", Icons.wb_sunny,"32C", context),
+            dayWidget("Martes", Icons.wb_sunny,"30C", context),
+            dayWidget("Miercoles", Icons.wb_cloudy,"16C", context),
+            dayWidget("Jueves", Icons.grain,"10C", context),
+            dayWidget("Viernes", Icons.wb_sunny,"32C", context),
 
           ],
         )
     );
   }
-  Widget dayWidget(String day, IconData icono, String temp){
+  Widget dayWidget(String day, IconData icono, String temp,BuildContext context){
     return Card(
+
       child: Padding(
-        padding: EdgeInsets.all(20.0),
+
+        padding: EdgeInsets.all(8.0),
         child: Row(
+
           mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
           children: <Widget>[
+
           Text(day),
           Icon(icono),
-          Text(temp)
+          Text(temp),
+          FlatButton(
+            child: Text("Detalle"),
+            color: Colors.black,
+            onPressed: (){
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => Detalle(day)
+                ));
+            },
+          )
+
         ],
       )
       ),
@@ -120,5 +134,27 @@ class HomePage extends StatelessWidget{
   }
 }
 
+
+class Detalle extends StatelessWidget{
+
+  final String day;
+
+  Detalle(this.day);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Detalles"
+        ),
+
+
+      ),
+      body: Text(day),
+    );
+  }
+}
 
 
